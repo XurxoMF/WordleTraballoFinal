@@ -4,17 +4,39 @@
  */
 package xurxo.martinez.wordle.gui;
 
+import java.awt.Color;
+import javax.swing.JLabel;
+
 /**
  *
  * @author xurxo
  */
 public class PrincipalJForm extends javax.swing.JFrame {
 
+    private static final Color VERDE = new Color(0, 102, 0);
+    private static final Color AMARILLO = new Color(204, 153, 0);
+    private static final Color ROJO = new Color(255, 51, 51);
+    
+    private static final int MAX_INTENTOS = 6;
+    private static final int TAMANHO_PALABRA = 5;
+    
+    private final JLabel[][] labels = new JLabel[MAX_INTENTOS][TAMANHO_PALABRA];
+
     /**
      * Creates new form PrincipalJForm
      */
     public PrincipalJForm() {
         initComponents();
+        generarString();
+    }
+    
+    public void generarString() {
+        for (int i = 1; i <= MAX_INTENTOS; i++) {
+            for (int j = 1; j <= TAMANHO_PALABRA; j++) {
+                String nombreLabel = "JLabel" + i + "_" + j;
+                System.out.println(nombreLabel);
+            }
+        }
     }
 
     /**
@@ -25,18 +47,289 @@ public class PrincipalJForm extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        mainJPanel = new javax.swing.JPanel();
+        letrasJPanel = new javax.swing.JPanel();
+        JLabel1_1 = new javax.swing.JLabel();
+        JLabel1_2 = new javax.swing.JLabel();
+        JLabel1_3 = new javax.swing.JLabel();
+        JLabel1_4 = new javax.swing.JLabel();
+        JLabel1_5 = new javax.swing.JLabel();
+        JLabel2_1 = new javax.swing.JLabel();
+        JLabel2_2 = new javax.swing.JLabel();
+        JLabel2_3 = new javax.swing.JLabel();
+        JLabel2_4 = new javax.swing.JLabel();
+        JLabel2_5 = new javax.swing.JLabel();
+        JLabel3_1 = new javax.swing.JLabel();
+        JLabel3_2 = new javax.swing.JLabel();
+        JLabel3_3 = new javax.swing.JLabel();
+        JLabel3_4 = new javax.swing.JLabel();
+        JLabel3_5 = new javax.swing.JLabel();
+        JLabel4_1 = new javax.swing.JLabel();
+        JLabel4_2 = new javax.swing.JLabel();
+        JLabel4_3 = new javax.swing.JLabel();
+        JLabel4_4 = new javax.swing.JLabel();
+        JLabel4_5 = new javax.swing.JLabel();
+        JLabel5_1 = new javax.swing.JLabel();
+        JLabel5_2 = new javax.swing.JLabel();
+        JLabel5_3 = new javax.swing.JLabel();
+        JLabel5_4 = new javax.swing.JLabel();
+        JLabel5_5 = new javax.swing.JLabel();
+        JLabel6_1 = new javax.swing.JLabel();
+        JLabel6_2 = new javax.swing.JLabel();
+        JLabel6_3 = new javax.swing.JLabel();
+        JLabel6_4 = new javax.swing.JLabel();
+        JLabel6_5 = new javax.swing.JLabel();
+        controlJPanel = new javax.swing.JPanel();
+        estadoJPanel = new javax.swing.JPanel();
+        malJPanel = new javax.swing.JPanel();
+        malJLabel = new javax.swing.JLabel();
+        existenJPanel = new javax.swing.JPanel();
+        existenJLabel = new javax.swing.JLabel();
+        bienJPanel = new javax.swing.JPanel();
+        bienJLabel = new javax.swing.JLabel();
+        entradaJPanel = new javax.swing.JPanel();
+        palabraJTextField = new javax.swing.JTextField();
+        enviarJButton = new javax.swing.JButton();
+        exitoJPanel = new javax.swing.JPanel();
+        finalJLabel = new javax.swing.JLabel();
+        errorJPanel = new javax.swing.JPanel();
+        errorJLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Xurxo Martínez Ferreira");
+
+        mainJPanel.setPreferredSize(new java.awt.Dimension(500, 600));
+        mainJPanel.setRequestFocusEnabled(false);
+        mainJPanel.setLayout(new java.awt.BorderLayout());
+
+        letrasJPanel.setPreferredSize(new java.awt.Dimension(500, 500));
+        letrasJPanel.setLayout(new java.awt.GridLayout(6, 5));
+
+        JLabel1_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel1_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel1_1.setText("A");
+        letrasJPanel.add(JLabel1_1);
+
+        JLabel1_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel1_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel1_2.setText("A");
+        letrasJPanel.add(JLabel1_2);
+
+        JLabel1_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel1_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel1_3.setText("A");
+        letrasJPanel.add(JLabel1_3);
+
+        JLabel1_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel1_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel1_4.setText("A");
+        letrasJPanel.add(JLabel1_4);
+
+        JLabel1_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel1_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel1_5.setText("A");
+        letrasJPanel.add(JLabel1_5);
+
+        JLabel2_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel2_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel2_1.setText("A");
+        letrasJPanel.add(JLabel2_1);
+
+        JLabel2_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel2_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel2_2.setText("A");
+        letrasJPanel.add(JLabel2_2);
+
+        JLabel2_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel2_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel2_3.setText("A");
+        letrasJPanel.add(JLabel2_3);
+
+        JLabel2_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel2_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel2_4.setText("A");
+        letrasJPanel.add(JLabel2_4);
+
+        JLabel2_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel2_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel2_5.setText("A");
+        letrasJPanel.add(JLabel2_5);
+
+        JLabel3_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel3_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel3_1.setText("A");
+        letrasJPanel.add(JLabel3_1);
+
+        JLabel3_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel3_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel3_2.setText("A");
+        letrasJPanel.add(JLabel3_2);
+
+        JLabel3_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel3_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel3_3.setText("A");
+        letrasJPanel.add(JLabel3_3);
+
+        JLabel3_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel3_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel3_4.setText("A");
+        letrasJPanel.add(JLabel3_4);
+
+        JLabel3_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel3_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel3_5.setText("A");
+        letrasJPanel.add(JLabel3_5);
+
+        JLabel4_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel4_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel4_1.setText("A");
+        letrasJPanel.add(JLabel4_1);
+
+        JLabel4_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel4_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel4_2.setText("A");
+        letrasJPanel.add(JLabel4_2);
+
+        JLabel4_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel4_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel4_3.setText("A");
+        letrasJPanel.add(JLabel4_3);
+
+        JLabel4_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel4_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel4_4.setText("A");
+        letrasJPanel.add(JLabel4_4);
+
+        JLabel4_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel4_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel4_5.setText("A");
+        letrasJPanel.add(JLabel4_5);
+
+        JLabel5_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel5_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel5_1.setText("A");
+        letrasJPanel.add(JLabel5_1);
+
+        JLabel5_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel5_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel5_2.setText("A");
+        letrasJPanel.add(JLabel5_2);
+
+        JLabel5_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel5_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel5_3.setText("A");
+        letrasJPanel.add(JLabel5_3);
+
+        JLabel5_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel5_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel5_4.setText("A");
+        letrasJPanel.add(JLabel5_4);
+
+        JLabel5_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel5_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel5_5.setText("A");
+        letrasJPanel.add(JLabel5_5);
+
+        JLabel6_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel6_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel6_1.setText("A");
+        letrasJPanel.add(JLabel6_1);
+
+        JLabel6_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel6_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel6_2.setText("A");
+        letrasJPanel.add(JLabel6_2);
+
+        JLabel6_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel6_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel6_3.setText("A");
+        letrasJPanel.add(JLabel6_3);
+
+        JLabel6_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel6_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel6_4.setText("A");
+        letrasJPanel.add(JLabel6_4);
+
+        JLabel6_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        JLabel6_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLabel6_5.setText("A");
+        letrasJPanel.add(JLabel6_5);
+
+        mainJPanel.add(letrasJPanel, java.awt.BorderLayout.CENTER);
+
+        controlJPanel.setLayout(new java.awt.GridLayout(2, 2));
+
+        estadoJPanel.setLayout(new java.awt.GridLayout(3, 1));
+
+        malJPanel.setLayout(new java.awt.GridLayout());
+
+        malJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        malJLabel.setForeground(new java.awt.Color(255, 51, 51));
+        malJPanel.add(malJLabel);
+
+        estadoJPanel.add(malJPanel);
+
+        existenJPanel.setLayout(new java.awt.GridLayout());
+
+        existenJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        existenJLabel.setForeground(new java.awt.Color(204, 153, 0));
+        existenJPanel.add(existenJLabel);
+
+        estadoJPanel.add(existenJPanel);
+
+        bienJPanel.setLayout(new java.awt.GridLayout());
+
+        bienJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        bienJLabel.setForeground(new java.awt.Color(0, 102, 0));
+        bienJPanel.add(bienJLabel);
+
+        estadoJPanel.add(bienJPanel);
+
+        controlJPanel.add(estadoJPanel);
+
+        palabraJTextField.setPreferredSize(new java.awt.Dimension(150, 24));
+        entradaJPanel.add(palabraJTextField);
+
+        enviarJButton.setText("Enviar");
+        entradaJPanel.add(enviarJButton);
+
+        controlJPanel.add(entradaJPanel);
+
+        exitoJPanel.setLayout(new java.awt.GridBagLayout());
+
+        finalJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        finalJLabel.setForeground(new java.awt.Color(0, 102, 0));
+        finalJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exitoJPanel.add(finalJLabel, new java.awt.GridBagConstraints());
+
+        controlJPanel.add(exitoJPanel);
+
+        errorJPanel.setLayout(new java.awt.GridBagLayout());
+
+        errorJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        errorJLabel.setForeground(new java.awt.Color(255, 51, 51));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 104, 21, 105);
+        errorJPanel.add(errorJLabel, gridBagConstraints);
+
+        controlJPanel.add(errorJPanel);
+
+        mainJPanel.add(controlJPanel, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(mainJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(mainJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -78,5 +371,58 @@ public class PrincipalJForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLabel1_1;
+    private javax.swing.JLabel JLabel1_2;
+    private javax.swing.JLabel JLabel1_3;
+    private javax.swing.JLabel JLabel1_4;
+    private javax.swing.JLabel JLabel1_5;
+    private javax.swing.JLabel JLabel2_1;
+    private javax.swing.JLabel JLabel2_2;
+    private javax.swing.JLabel JLabel2_3;
+    private javax.swing.JLabel JLabel2_4;
+    private javax.swing.JLabel JLabel2_5;
+    private javax.swing.JLabel JLabel3_1;
+    private javax.swing.JLabel JLabel3_2;
+    private javax.swing.JLabel JLabel3_3;
+    private javax.swing.JLabel JLabel3_4;
+    private javax.swing.JLabel JLabel3_5;
+    private javax.swing.JLabel JLabel4_1;
+    private javax.swing.JLabel JLabel4_2;
+    private javax.swing.JLabel JLabel4_3;
+    private javax.swing.JLabel JLabel4_4;
+    private javax.swing.JLabel JLabel4_5;
+    private javax.swing.JLabel JLabel5_1;
+    private javax.swing.JLabel JLabel5_2;
+    private javax.swing.JLabel JLabel5_3;
+    private javax.swing.JLabel JLabel5_4;
+    private javax.swing.JLabel JLabel5_5;
+    private javax.swing.JLabel JLabel6_1;
+    private javax.swing.JLabel JLabel6_2;
+    private javax.swing.JLabel JLabel6_3;
+    private javax.swing.JLabel JLabel6_4;
+    private javax.swing.JLabel JLabel6_5;
+    private javax.swing.JLabel bienJLabel;
+    private javax.swing.JPanel bienJPanel;
+    private javax.swing.JPanel controlJPanel;
+    private javax.swing.JPanel entradaJPanel;
+    private javax.swing.JButton enviarJButton;
+    private javax.swing.JLabel errorJLabel;
+    private javax.swing.JPanel errorJPanel;
+    private javax.swing.JPanel estadoJPanel;
+    private javax.swing.JLabel existenJLabel;
+    private javax.swing.JPanel existenJPanel;
+    private javax.swing.JPanel exitoJPanel;
+    private javax.swing.JLabel finalJLabel;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel letrasJPanel;
+    private javax.swing.JPanel mainJPanel;
+    private javax.swing.JLabel malJLabel;
+    private javax.swing.JPanel malJPanel;
+    private javax.swing.JTextField palabraJTextField;
     // End of variables declaration//GEN-END:variables
 }
