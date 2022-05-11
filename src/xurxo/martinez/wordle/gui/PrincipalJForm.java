@@ -5,6 +5,8 @@
 package xurxo.martinez.wordle.gui;
 
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -27,14 +29,31 @@ public class PrincipalJForm extends javax.swing.JFrame {
      */
     public PrincipalJForm() {
         initComponents();
-        generarString();
+        inicializarLabels();
     }
     
-    public void generarString() {
+    public void test() {
+        for (int i = 0; i < labels.length; i++) {
+            JLabel[] label = labels[i];
+            for (int j = 0; j < label.length; j++) {
+                JLabel jLabel = label[j];
+                jLabel.setVisible(false);
+            }
+            
+        }
+    }
+    
+    public final void inicializarLabels() {
         for (int i = 1; i <= MAX_INTENTOS; i++) {
             for (int j = 1; j <= TAMANHO_PALABRA; j++) {
-                String nombreLabel = "JLabel" + i + "_" + j;
-                System.out.println(nombreLabel);
+                try {
+                    String nombreLabel = "JLabel" + i + "_" + j;
+                    System.out.println(nombreLabel);
+                    JLabel aux = (JLabel)this.getClass().getDeclaredField(nombreLabel).get(this);
+                    labels[i - 1][j - 1] = aux;
+                } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
+                    Logger.getLogger(PrincipalJForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
@@ -100,10 +119,12 @@ public class PrincipalJForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Xurxo Martínez Ferreira");
 
+        mainJPanel.setBackground(new java.awt.Color(204, 204, 204));
         mainJPanel.setPreferredSize(new java.awt.Dimension(500, 600));
         mainJPanel.setRequestFocusEnabled(false);
         mainJPanel.setLayout(new java.awt.BorderLayout());
 
+        letrasJPanel.setBackground(new java.awt.Color(204, 204, 204));
         letrasJPanel.setPreferredSize(new java.awt.Dimension(500, 500));
         letrasJPanel.setLayout(new java.awt.GridLayout(6, 5));
 
@@ -259,11 +280,14 @@ public class PrincipalJForm extends javax.swing.JFrame {
 
         mainJPanel.add(letrasJPanel, java.awt.BorderLayout.CENTER);
 
+        controlJPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
         controlJPanel.setLayout(new java.awt.GridLayout(2, 2));
 
+        estadoJPanel.setBackground(new java.awt.Color(204, 204, 204));
         estadoJPanel.setLayout(new java.awt.GridLayout(3, 1));
 
-        malJPanel.setLayout(new java.awt.GridLayout());
+        malJPanel.setBackground(new java.awt.Color(204, 204, 204));
+        malJPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         malJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         malJLabel.setForeground(new java.awt.Color(255, 51, 51));
@@ -271,7 +295,8 @@ public class PrincipalJForm extends javax.swing.JFrame {
 
         estadoJPanel.add(malJPanel);
 
-        existenJPanel.setLayout(new java.awt.GridLayout());
+        existenJPanel.setBackground(new java.awt.Color(204, 204, 204));
+        existenJPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         existenJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         existenJLabel.setForeground(new java.awt.Color(204, 153, 0));
@@ -279,7 +304,8 @@ public class PrincipalJForm extends javax.swing.JFrame {
 
         estadoJPanel.add(existenJPanel);
 
-        bienJPanel.setLayout(new java.awt.GridLayout());
+        bienJPanel.setBackground(new java.awt.Color(204, 204, 204));
+        bienJPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         bienJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         bienJLabel.setForeground(new java.awt.Color(0, 102, 0));
@@ -289,6 +315,8 @@ public class PrincipalJForm extends javax.swing.JFrame {
 
         controlJPanel.add(estadoJPanel);
 
+        entradaJPanel.setBackground(new java.awt.Color(204, 204, 204));
+
         palabraJTextField.setPreferredSize(new java.awt.Dimension(150, 24));
         entradaJPanel.add(palabraJTextField);
 
@@ -297,6 +325,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
 
         controlJPanel.add(entradaJPanel);
 
+        exitoJPanel.setBackground(new java.awt.Color(204, 204, 204));
         exitoJPanel.setLayout(new java.awt.GridBagLayout());
 
         finalJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -306,6 +335,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
 
         controlJPanel.add(exitoJPanel);
 
+        errorJPanel.setBackground(new java.awt.Color(204, 204, 204));
         errorJPanel.setLayout(new java.awt.GridBagLayout());
 
         errorJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -413,12 +443,6 @@ public class PrincipalJForm extends javax.swing.JFrame {
     private javax.swing.JPanel existenJPanel;
     private javax.swing.JPanel exitoJPanel;
     private javax.swing.JLabel finalJLabel;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel letrasJPanel;
     private javax.swing.JPanel mainJPanel;
     private javax.swing.JLabel malJLabel;
