@@ -18,10 +18,10 @@ public class PrincipalJForm extends javax.swing.JFrame {
     private static final Color VERDE = new Color(0, 102, 0);
     private static final Color AMARILLO = new Color(204, 153, 0);
     private static final Color ROJO = new Color(255, 51, 51);
-    
+
     private static final int MAX_INTENTOS = 6;
     private static final int TAMANHO_PALABRA = 5;
-    
+
     private final JLabel[][] labels = new JLabel[MAX_INTENTOS][TAMANHO_PALABRA];
 
     /**
@@ -31,25 +31,21 @@ public class PrincipalJForm extends javax.swing.JFrame {
         initComponents();
         inicializarLabels();
     }
-    
+
     public void test() {
-        for (int i = 0; i < labels.length; i++) {
-            JLabel[] label = labels[i];
-            for (int j = 0; j < label.length; j++) {
-                JLabel jLabel = label[j];
-                jLabel.setVisible(false);
-            }
-            
+        JLabel[] label = labels[1];
+        for (int j = 0; j < label.length; j++) {
+            JLabel jLabel = label[j];
+            jLabel.setVisible(false);
         }
     }
-    
+
     public final void inicializarLabels() {
         for (int i = 1; i <= MAX_INTENTOS; i++) {
             for (int j = 1; j <= TAMANHO_PALABRA; j++) {
                 try {
                     String nombreLabel = "JLabel" + i + "_" + j;
-                    System.out.println(nombreLabel);
-                    JLabel aux = (JLabel)this.getClass().getDeclaredField(nombreLabel).get(this);
+                    JLabel aux = (JLabel) this.getClass().getDeclaredField(nombreLabel).get(this);
                     labels[i - 1][j - 1] = aux;
                 } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
                     Logger.getLogger(PrincipalJForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -381,15 +377,11 @@ public class PrincipalJForm extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalJForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalJForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalJForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PrincipalJForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */

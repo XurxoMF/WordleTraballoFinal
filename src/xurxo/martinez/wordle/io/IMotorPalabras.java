@@ -12,10 +12,10 @@ public interface IMotorPalabras {
     
     public String getPalabraRandom();
     
-    public boolean existePalabra();
+    public boolean existePalabra(String palabra);
     
-    public boolean anhadirPalabra();
+    public boolean anhadirPalabra(String palabra);
     
-    public boolean eliminarPalabra();
+    public boolean eliminarPalabra(String palabra);
     
 }
