@@ -111,6 +111,13 @@ public class PrincipalJForm extends javax.swing.JFrame {
         finalJLabel = new javax.swing.JLabel();
         errorJPanel = new javax.swing.JPanel();
         errorJLabel = new javax.swing.JLabel();
+        menuJmenuBar = new javax.swing.JMenuBar();
+        archivoJMenu = new javax.swing.JMenu();
+        nuevaPartidaJMenuItem = new javax.swing.JMenuItem();
+        motoresJMenu = new javax.swing.JMenu();
+        listaMotoresJMenu = new javax.swing.JMenu();
+        motorTestJMenuItem = new javax.swing.JMenuItem();
+        gestionMotorJMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Xurxo Martínez Ferreira");
@@ -347,6 +354,32 @@ public class PrincipalJForm extends javax.swing.JFrame {
 
         mainJPanel.add(controlJPanel, java.awt.BorderLayout.PAGE_END);
 
+        menuJmenuBar.setBackground(new java.awt.Color(204, 204, 204));
+
+        archivoJMenu.setText("Archivo");
+
+        nuevaPartidaJMenuItem.setText("Nueva partida");
+        archivoJMenu.add(nuevaPartidaJMenuItem);
+
+        menuJmenuBar.add(archivoJMenu);
+
+        motoresJMenu.setText("Motores");
+
+        listaMotoresJMenu.setText("Cambiar motor");
+        listaMotoresJMenu.setToolTipText("");
+
+        motorTestJMenuItem.setText("Motor test");
+        listaMotoresJMenu.add(motorTestJMenuItem);
+
+        motoresJMenu.add(listaMotoresJMenu);
+
+        gestionMotorJMenuItem.setText("Gestion motor");
+        motoresJMenu.add(gestionMotorJMenuItem);
+
+        menuJmenuBar.add(motoresJMenu);
+
+        setJMenuBar(menuJmenuBar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -355,7 +388,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
         );
 
         pack();
@@ -423,6 +456,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
     private javax.swing.JLabel JLabel6_3;
     private javax.swing.JLabel JLabel6_4;
     private javax.swing.JLabel JLabel6_5;
+    private javax.swing.JMenu archivoJMenu;
     private javax.swing.JLabel bienJLabel;
     private javax.swing.JPanel bienJPanel;
     private javax.swing.JPanel controlJPanel;
@@ -435,10 +469,16 @@ public class PrincipalJForm extends javax.swing.JFrame {
     private javax.swing.JPanel existenJPanel;
     private javax.swing.JPanel exitoJPanel;
     private javax.swing.JLabel finalJLabel;
+    private javax.swing.JMenuItem gestionMotorJMenuItem;
     private javax.swing.JPanel letrasJPanel;
+    private javax.swing.JMenu listaMotoresJMenu;
     private javax.swing.JPanel mainJPanel;
     private javax.swing.JLabel malJLabel;
     private javax.swing.JPanel malJPanel;
+    private javax.swing.JMenuBar menuJmenuBar;
+    private javax.swing.JMenuItem motorTestJMenuItem;
+    private javax.swing.JMenu motoresJMenu;
+    private javax.swing.JMenuItem nuevaPartidaJMenuItem;
     private javax.swing.JTextField palabraJTextField;
     // End of variables declaration//GEN-END:variables
 }
