@@ -16,8 +16,12 @@ import java.util.List;
  */
 public class MotorTest implements IMotorPalabras {
     
-    String[] ar = {"AAAAA", "BBBBB", "CCCCC", "DDDDD", "EEEEE"};
-    List<String> palabras = new ArrayList<>(Arrays.asList(ar));
+    private final String[] ar = {"AAAAA", "BBBBB", "CCCCC", "DDDDD", "EEEEE"};
+    private final List<String> palabras;
+    
+    public MotorTest() {
+        palabras = new ArrayList<>(Arrays.asList(ar));
+    }
     
     @Override
     public String getPalabraRandom() {

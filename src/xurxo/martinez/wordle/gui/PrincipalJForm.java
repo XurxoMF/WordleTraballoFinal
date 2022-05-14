@@ -5,9 +5,15 @@
 package xurxo.martinez.wordle.gui;
 
 import java.awt.Color;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import xurxo.martinez.wordle.game.Colores;
+import xurxo.martinez.wordle.game.WordleClass;
+import xurxo.martinez.wordle.io.IMotorPalabras;
+import xurxo.martinez.wordle.io.MotorTest;
 
 /**
  *
@@ -23,6 +29,14 @@ public class PrincipalJForm extends javax.swing.JFrame {
     private static final int TAMANHO_PALABRA = 5;
 
     private final JLabel[][] labels = new JLabel[MAX_INTENTOS][TAMANHO_PALABRA];
+    
+    private IMotorPalabras motor = new MotorTest();
+    private WordleClass game = new WordleClass();
+    
+    GestionMotorJDialog modalMotores = new GestionMotorJDialog(this, true);
+    
+    private String random = motor.getPalabraRandom().toUpperCase();
+    private int intentos = 0;
 
     /**
      * Creates new form PrincipalJForm
@@ -30,16 +44,69 @@ public class PrincipalJForm extends javax.swing.JFrame {
     public PrincipalJForm() {
         initComponents();
         inicializarLabels();
+        resetGame();
     }
 
-    public void test() {
-        JLabel[] label = labels[1];
-        for (int j = 0; j < label.length; j++) {
-            JLabel jLabel = label[j];
-            jLabel.setVisible(false);
+    public void resolver(List<Colores> col, String pal) {
+        JLabel[] label = labels[intentos];
+        for (int i = 0; i < label.length; i++) {
+            JLabel jLabel = label[i];
+            jLabel.setText(Character.toString(pal.charAt(i)));
+            switch(col.get(i)){
+                case VERDE:
+                    jLabel.setForeground(VERDE);
+                    break;
+                case ROJO:
+                    jLabel.setForeground(ROJO);
+                    break;
+                case AMARILLO:
+                    jLabel.setForeground(AMARILLO);
+                    break;
+                default :
+                    jLabel.setForeground(new Color(255, 255, 255));
+                    break;
+            }
+            jLabel.setVisible(true);
+            bienJLabel.setText(game.getBien());
+            malJLabel.setText(game.getMal());
+            existenJLabel.setText(game.getExiste());
         }
     }
 
+    public final void resetGame() {
+        game = new WordleClass();
+        for (JLabel[] labelAr : labels) {
+            for (JLabel jLabel : labelAr) {
+                jLabel.setVisible(false);
+            }
+        }
+        bienJLabel.setText("");
+        malJLabel.setText("");
+        existenJLabel.setText("");
+        palabraJTextField.setText("");
+        finalJLabel.setText("");
+        errorJLabel.setText("");
+    }
+    
+    public final void finGame() {
+        JOptionPane.showMessageDialog(this, "Límite de intentos alcanzado, GAME OVER");
+        resetGame();
+    }
+    
+    public String getPalabraUsuario() {
+        String pal = palabraJTextField.getText().toUpperCase();
+        palabraJTextField.setText("");
+        return pal;
+    }
+    
+    public boolean checkPalabraUsuario() {
+        if (!palabraJTextField.getText().matches("[A-Za-z]{5}")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     public final void inicializarLabels() {
         for (int i = 1; i <= MAX_INTENTOS; i++) {
             for (int j = 1; j <= TAMANHO_PALABRA; j++) {
@@ -53,6 +120,16 @@ public class PrincipalJForm extends javax.swing.JFrame {
             }
         }
     }
+      
+    public IMotorPalabras getMotor() {
+        return motor;
+    }
+    
+    public void setMotor(IMotorPalabras newMotor) {
+        motor = newMotor;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -324,6 +401,11 @@ public class PrincipalJForm extends javax.swing.JFrame {
         entradaJPanel.add(palabraJTextField);
 
         enviarJButton.setText("Enviar");
+        enviarJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarJButtonActionPerformed(evt);
+            }
+        });
         entradaJPanel.add(enviarJButton);
 
         controlJPanel.add(entradaJPanel);
@@ -393,6 +475,22 @@ public class PrincipalJForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void enviarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarJButtonActionPerformed
+        String usuario;
+        if (checkPalabraUsuario()) {
+            usuario = getPalabraUsuario();
+            List<Colores> colores = game.comprobarPalabra(random, usuario);
+            resolver(colores, usuario);
+            intentos++;
+            if (intentos >= 6) {
+                finGame();
+            }
+        } else {
+            errorJLabel.setText("La palabra no cumple el formato AAAAA!");
+            palabraJTextField.setText("");
+        }
+    }//GEN-LAST:event_enviarJButtonActionPerformed
 
     /**
      * @param args the command line arguments
