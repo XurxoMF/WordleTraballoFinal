@@ -5,14 +5,25 @@
  */
 package xurxo.martinez.wordle.gui;
 
+import xurxo.martinez.wordle.io.IMotorPalabras;
+
 /**
  *
  * @author alumno
  */
 public class GestionMotorJDialog extends javax.swing.JDialog {
 
+    private IMotorPalabras motor;
+
+    public GestionMotorJDialog(java.awt.Frame parent, boolean modal, IMotorPalabras motor) {
+        super(parent, modal);
+        initComponents();
+        this.motor = motor;
+    }
+
     /**
      * Creates new form GestionMotorJDialog
+     *
      * @param parent
      * @param modal
      */
@@ -67,17 +78,20 @@ public class GestionMotorJDialog extends javax.swing.JDialog {
         contenedorJPanel.setLayout(new java.awt.GridLayout(2, 1));
 
         anhadirJPanel.setBackground(new java.awt.Color(204, 204, 204));
-        anhadirJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alta palabra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12))); // NOI18N
+        anhadirJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Alta palabra"));
         anhadirJPanel.setLayout(new java.awt.GridLayout(2, 1));
 
         controlAnhadirJPalen.setBackground(new java.awt.Color(204, 204, 204));
 
-        anhadirJTextField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         anhadirJTextField.setPreferredSize(new java.awt.Dimension(160, 23));
         controlAnhadirJPalen.add(anhadirJTextField);
 
-        anhadirJButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         anhadirJButton.setText("Añadir");
+        anhadirJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anhadirJButtonActionPerformed(evt);
+            }
+        });
         controlAnhadirJPalen.add(anhadirJButton);
 
         anhadirJPanel.add(controlAnhadirJPalen);
@@ -86,7 +100,6 @@ public class GestionMotorJDialog extends javax.swing.JDialog {
         infoAnhadirJPanel.setLayout(new java.awt.GridBagLayout());
 
         infoAnhadirJLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        infoAnhadirJLabel.setText("Hola");
         infoAnhadirJLabel.setToolTipText("");
         infoAnhadirJPanel.add(infoAnhadirJLabel, new java.awt.GridBagConstraints());
 
@@ -95,7 +108,7 @@ public class GestionMotorJDialog extends javax.swing.JDialog {
         contenedorJPanel.add(anhadirJPanel);
 
         eliminarJPanel.setBackground(new java.awt.Color(204, 204, 204));
-        eliminarJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Borrado palabra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12))); // NOI18N
+        eliminarJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Borrado palabra"));
         eliminarJPanel.setLayout(new java.awt.GridLayout(2, 1));
 
         controlEliminarJPanel.setBackground(new java.awt.Color(204, 204, 204));
@@ -103,12 +116,15 @@ public class GestionMotorJDialog extends javax.swing.JDialog {
         flowLayout1.setAlignOnBaseline(true);
         controlEliminarJPanel.setLayout(flowLayout1);
 
-        eliminarJTextField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         eliminarJTextField.setPreferredSize(new java.awt.Dimension(160, 23));
         controlEliminarJPanel.add(eliminarJTextField);
 
-        eliminarJButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         eliminarJButton.setText("Eliminar");
+        eliminarJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarJButtonActionPerformed(evt);
+            }
+        });
         controlEliminarJPanel.add(eliminarJButton);
 
         eliminarJPanel.add(controlEliminarJPanel);
@@ -117,7 +133,6 @@ public class GestionMotorJDialog extends javax.swing.JDialog {
         infoEliminarJPanel.setLayout(new java.awt.GridBagLayout());
 
         infoEliminarJLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        infoEliminarJLabel.setText("Hola");
         infoEliminarJLabel.setToolTipText("");
         infoEliminarJPanel.add(infoEliminarJLabel, new java.awt.GridBagConstraints());
 
@@ -140,6 +155,38 @@ public class GestionMotorJDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void anhadirJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anhadirJButtonActionPerformed
+        String palabra = anhadirJTextField.getText().toUpperCase();
+        if(motor.checkPalabra(palabra)) {
+            if(motor.anhadirPalabra(palabra)) {
+                infoAnhadirJLabel.setText("Añadida correctamente");
+                infoAnhadirJLabel.setForeground(PrincipalJForm.VERDE);
+            } else {
+                infoAnhadirJLabel.setText("Error al agregar la palabra!");
+                infoAnhadirJLabel.setForeground(PrincipalJForm.ROJO);
+            }
+        } else {
+            infoAnhadirJLabel.setText("La palabra no cumple el formato AAAAA!");
+            infoAnhadirJLabel.setForeground(PrincipalJForm.ROJO);
+        }
+    }//GEN-LAST:event_anhadirJButtonActionPerformed
+
+    private void eliminarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarJButtonActionPerformed
+        String palabra = eliminarJTextField.getText().toUpperCase();
+        if(motor.checkPalabra(palabra)) {
+            if(motor.eliminarPalabra(palabra)) {
+                infoEliminarJLabel.setText("Palabra eliminada con éxito!");
+                infoEliminarJLabel.setForeground(PrincipalJForm.VERDE);
+            } else {
+                infoEliminarJLabel.setText("La palabra no existe o no se pudo eliminar!");
+                infoEliminarJLabel.setForeground(PrincipalJForm.ROJO);
+            }
+        } else {
+            infoEliminarJLabel.setText("La palabra no cumple el formato AAAAA!");
+            infoEliminarJLabel.setForeground(PrincipalJForm.ROJO);
+        }
+    }//GEN-LAST:event_eliminarJButtonActionPerformed
 
     /**
      * @param args the command line arguments

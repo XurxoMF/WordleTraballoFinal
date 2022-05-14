@@ -17,11 +17,9 @@ import java.util.List;
 public class MotorTest implements IMotorPalabras {
     
     private final String[] ar = {"AAAAA", "BBBBB", "CCCCC", "DDDDD", "EEEEE"};
-    private final List<String> palabras;
+    private final List<String> palabras = new ArrayList<>(Arrays.asList(ar));
     
-    public MotorTest() {
-        palabras = new ArrayList<>(Arrays.asList(ar));
-    }
+    public MotorTest(){}
     
     @Override
     public String getPalabraRandom() {
@@ -35,7 +33,7 @@ public class MotorTest implements IMotorPalabras {
 
     @Override
     public boolean anhadirPalabra(String palabra) {
-        if (palabra.matches("\b[A-Z]{5}\b") && !palabras.contains(palabra)) {
+        if (palabra.matches("[A-Z]{5}") && !palabras.contains(palabra)) {
             return palabras.add(palabra);
         } else {
             return false;
@@ -45,6 +43,11 @@ public class MotorTest implements IMotorPalabras {
     @Override
     public boolean eliminarPalabra(String palabra) {
         return palabras.remove(palabra);
+    }
+    
+    @Override
+    public boolean checkPalabra(String palabra) {
+        return palabra.matches("[A-Z]{5}");
     }
     
 }

@@ -21,9 +21,9 @@ import xurxo.martinez.wordle.io.MotorTest;
  */
 public class PrincipalJForm extends javax.swing.JFrame {
 
-    private static final Color VERDE = new Color(0, 102, 0);
-    private static final Color AMARILLO = new Color(204, 153, 0);
-    private static final Color ROJO = new Color(255, 51, 51);
+    public static final Color VERDE = new Color(0, 102, 0);
+    public static final Color AMARILLO = new Color(204, 153, 0);
+    public static final Color ROJO = new Color(255, 51, 51);
 
     private static final int MAX_INTENTOS = 6;
     private static final int TAMANHO_PALABRA = 5;
@@ -32,8 +32,6 @@ public class PrincipalJForm extends javax.swing.JFrame {
     
     private IMotorPalabras motor = new MotorTest();
     private WordleClass game = new WordleClass();
-    
-    GestionMotorJDialog modalMotores = new GestionMotorJDialog(this, true);
     
     private String random = motor.getPalabraRandom().toUpperCase();
     private int intentos = 0;
@@ -47,7 +45,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
         resetGame();
     }
 
-    public void resolver(List<Colores> col, String pal) {
+    private void resolver(List<Colores> col, String pal) {
         JLabel[] label = labels[intentos];
         for (int i = 0; i < label.length; i++) {
             JLabel jLabel = label[i];
@@ -73,7 +71,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
         }
     }
 
-    public final void resetGame() {
+    private final void resetGame() {
         game = new WordleClass();
         for (JLabel[] labelAr : labels) {
             for (JLabel jLabel : labelAr) {
@@ -86,28 +84,38 @@ public class PrincipalJForm extends javax.swing.JFrame {
         palabraJTextField.setText("");
         finalJLabel.setText("");
         errorJLabel.setText("");
+        intentos = 0;
+        random = motor.getPalabraRandom();
+        palabraJTextField.setEnabled(true);
+        enviarJButton.setEnabled(true);
     }
     
-    public final void finGame() {
+    private final void finGame() {
         JOptionPane.showMessageDialog(this, "Límite de intentos alcanzado, GAME OVER");
         resetGame();
     }
     
-    public String getPalabraUsuario() {
+    private boolean checkVictoria(List<Colores> colores) {
+        int acertos = 0;
+        for (Colores col : colores) {
+            if (col.equals(Colores.VERDE)) {
+                acertos++;
+            }
+        }
+        return acertos == TAMANHO_PALABRA;
+    }
+    
+    private String getPalabraUsuario() {
         String pal = palabraJTextField.getText().toUpperCase();
         palabraJTextField.setText("");
         return pal;
     }
     
-    public boolean checkPalabraUsuario() {
-        if (!palabraJTextField.getText().matches("[A-Za-z]{5}")) {
-            return false;
-        } else {
-            return true;
-        }
+    private boolean checkPalabraUsuario() {
+        return motor.checkPalabra(palabraJTextField.getText().toUpperCase());
     }
     
-    public final void inicializarLabels() {
+    private void inicializarLabels() {
         for (int i = 1; i <= MAX_INTENTOS; i++) {
             for (int j = 1; j <= TAMANHO_PALABRA; j++) {
                 try {
@@ -120,7 +128,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
             }
         }
     }
-      
+    
     public IMotorPalabras getMotor() {
         return motor;
     }
@@ -128,8 +136,6 @@ public class PrincipalJForm extends javax.swing.JFrame {
     public void setMotor(IMotorPalabras newMotor) {
         motor = newMotor;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -416,6 +422,9 @@ public class PrincipalJForm extends javax.swing.JFrame {
         finalJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         finalJLabel.setForeground(new java.awt.Color(0, 102, 0));
         finalJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        finalJLabel.setMaximumSize(new java.awt.Dimension(230, 20));
+        finalJLabel.setMinimumSize(new java.awt.Dimension(230, 20));
+        finalJLabel.setPreferredSize(new java.awt.Dimension(230, 20));
         exitoJPanel.add(finalJLabel, new java.awt.GridBagConstraints());
 
         controlJPanel.add(exitoJPanel);
@@ -425,11 +434,15 @@ public class PrincipalJForm extends javax.swing.JFrame {
 
         errorJLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         errorJLabel.setForeground(new java.awt.Color(255, 51, 51));
+        errorJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorJLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        errorJLabel.setMaximumSize(new java.awt.Dimension(230, 20));
+        errorJLabel.setMinimumSize(new java.awt.Dimension(230, 20));
+        errorJLabel.setPreferredSize(new java.awt.Dimension(230, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 104, 21, 105);
         errorJPanel.add(errorJLabel, gridBagConstraints);
 
         controlJPanel.add(errorJPanel);
@@ -441,6 +454,11 @@ public class PrincipalJForm extends javax.swing.JFrame {
         archivoJMenu.setText("Archivo");
 
         nuevaPartidaJMenuItem.setText("Nueva partida");
+        nuevaPartidaJMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevaPartidaJMenuItemActionPerformed(evt);
+            }
+        });
         archivoJMenu.add(nuevaPartidaJMenuItem);
 
         menuJmenuBar.add(archivoJMenu);
@@ -456,6 +474,11 @@ public class PrincipalJForm extends javax.swing.JFrame {
         motoresJMenu.add(listaMotoresJMenu);
 
         gestionMotorJMenuItem.setText("Gestion motor");
+        gestionMotorJMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionMotorJMenuItemActionPerformed(evt);
+            }
+        });
         motoresJMenu.add(gestionMotorJMenuItem);
 
         menuJmenuBar.add(motoresJMenu);
@@ -470,27 +493,43 @@ public class PrincipalJForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+            .addComponent(mainJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void enviarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarJButtonActionPerformed
-        String usuario;
         if (checkPalabraUsuario()) {
-            usuario = getPalabraUsuario();
+            errorJLabel.setText("");
+            String usuario = getPalabraUsuario();
             List<Colores> colores = game.comprobarPalabra(random, usuario);
             resolver(colores, usuario);
-            intentos++;
-            if (intentos >= 6) {
-                finGame();
+            if (checkVictoria(colores)) {
+                finalJLabel.setText("Has ganado con " + (intentos + 1) + " intentos!");
+                palabraJTextField.setEnabled(false);
+                enviarJButton.setEnabled(false);
+            } else {
+                intentos++;
+                if (intentos >= 6) {
+                    finGame();
+                }
             }
         } else {
-            errorJLabel.setText("La palabra no cumple el formato AAAAA!");
+            errorJLabel.setText("Error, formato AAAAA!");
             palabraJTextField.setText("");
         }
     }//GEN-LAST:event_enviarJButtonActionPerformed
+
+    private void nuevaPartidaJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaPartidaJMenuItemActionPerformed
+        resetGame();
+    }//GEN-LAST:event_nuevaPartidaJMenuItemActionPerformed
+
+    private void gestionMotorJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionMotorJMenuItemActionPerformed
+        GestionMotorJDialog modalMotores = new GestionMotorJDialog(this, true, motor);
+        modalMotores.setVisible(true);
+        resetGame();
+    }//GEN-LAST:event_gestionMotorJMenuItemActionPerformed
 
     /**
      * @param args the command line arguments

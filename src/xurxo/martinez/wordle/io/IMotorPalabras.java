@@ -18,4 +18,6 @@ public interface IMotorPalabras {
     
     public boolean eliminarPalabra(String palabra);
     
+    public boolean checkPalabra(String palabra);
+    
 }
