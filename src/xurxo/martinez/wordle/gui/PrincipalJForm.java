@@ -504,6 +504,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
             errorJLabel.setText("");
             String usuario = getPalabraUsuario();
             List<Colores> colores = game.comprobarPalabra(random, usuario);
+            System.out.println(colores);
             resolver(colores, usuario);
             if (checkVictoria(colores)) {
                 finalJLabel.setText("Has ganado con " + (intentos + 1) + " intentos!");

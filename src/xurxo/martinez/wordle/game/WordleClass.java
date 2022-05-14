@@ -56,6 +56,11 @@ public class WordleClass {
                 if (pRand.contains(pUser.get(i))) {
                     resultado.add(i, Colores.AMARILLO);
                     existe.add(pUser.get(i));
+                    pRand.set(pRand.indexOf(pUser.get(i)), null);
+                    pUser.set(i, null);
+                } else {
+                    resultado.add(Colores.ROJO);
+                    mal.add(pUser.get(i));
                     pUser.set(i, null);
                 }
             }
