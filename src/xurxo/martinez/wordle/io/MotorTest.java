@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class MotorTest implements IMotorPalabras {
     
-    private final String[] ar = {"CASAS", "HOLAX", "LAURA", "PASAR", "ARROZ"};
+    private final String[] ar = {"CICLO"};
     private final List<String> palabras = new ArrayList<>(Arrays.asList(ar));
     
     public MotorTest(){}

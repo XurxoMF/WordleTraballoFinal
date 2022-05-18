@@ -5,6 +5,7 @@
 package xurxo.martinez.wordle.gui;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 import xurxo.martinez.wordle.game.Colores;
 import xurxo.martinez.wordle.game.WordleClass;
 import xurxo.martinez.wordle.io.IMotorPalabras;
+import xurxo.martinez.wordle.io.MotorDocumento;
 import xurxo.martinez.wordle.io.MotorTest;
 
 /**
@@ -200,6 +202,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
         motoresJMenu = new javax.swing.JMenu();
         listaMotoresJMenu = new javax.swing.JMenu();
         motorTestJMenuItem = new javax.swing.JMenuItem();
+        motorFicheiroJMenuItem = new javax.swing.JMenuItem();
         gestionMotorJMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -469,7 +472,20 @@ public class PrincipalJForm extends javax.swing.JFrame {
         listaMotoresJMenu.setToolTipText("");
 
         motorTestJMenuItem.setText("Motor test");
+        motorTestJMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motorTestJMenuItemActionPerformed(evt);
+            }
+        });
         listaMotoresJMenu.add(motorTestJMenuItem);
+
+        motorFicheiroJMenuItem.setText("Motor ficheiro");
+        motorFicheiroJMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motorFicheiroJMenuItemActionPerformed(evt);
+            }
+        });
+        listaMotoresJMenu.add(motorFicheiroJMenuItem);
 
         motoresJMenu.add(listaMotoresJMenu);
 
@@ -504,7 +520,6 @@ public class PrincipalJForm extends javax.swing.JFrame {
             errorJLabel.setText("");
             String usuario = getPalabraUsuario();
             List<Colores> colores = game.comprobarPalabra(random, usuario);
-            System.out.println(colores);
             resolver(colores, usuario);
             if (checkVictoria(colores)) {
                 finalJLabel.setText("Has ganado con " + (intentos + 1) + " intentos!");
@@ -531,6 +546,20 @@ public class PrincipalJForm extends javax.swing.JFrame {
         modalMotores.setVisible(true);
         resetGame();
     }//GEN-LAST:event_gestionMotorJMenuItemActionPerformed
+
+    private void motorFicheiroJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorFicheiroJMenuItemActionPerformed
+        try {
+            setMotor(new MotorDocumento());
+            resetGame();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error al cambiar el motor!!");
+        }
+    }//GEN-LAST:event_motorFicheiroJMenuItemActionPerformed
+
+    private void motorTestJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorTestJMenuItemActionPerformed
+        setMotor(new MotorTest());
+        resetGame();
+    }//GEN-LAST:event_motorTestJMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -614,6 +643,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
     private javax.swing.JLabel malJLabel;
     private javax.swing.JPanel malJPanel;
     private javax.swing.JMenuBar menuJmenuBar;
+    private javax.swing.JMenuItem motorFicheiroJMenuItem;
     private javax.swing.JMenuItem motorTestJMenuItem;
     private javax.swing.JMenu motoresJMenu;
     private javax.swing.JMenuItem nuevaPartidaJMenuItem;

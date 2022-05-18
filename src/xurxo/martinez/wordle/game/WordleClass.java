@@ -29,7 +29,7 @@ public class WordleClass {
 
     public List<Colores> comprobarPalabra(String palabraRandom, String palabraUsuario) {
         List<Colores> resultado = new ArrayList<>(5);
-        List<Character> pRand = new ArrayList<>();
+        List<Character> pRand = new ArrayList<>(5);
         for (char letra : palabraRandom.toCharArray()) {
             pRand.add((Character) letra);
         }
