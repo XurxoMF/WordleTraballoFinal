@@ -199,6 +199,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
         menuJmenuBar = new javax.swing.JMenuBar();
         archivoJMenu = new javax.swing.JMenu();
         nuevaPartidaJMenuItem = new javax.swing.JMenuItem();
+        salirJMenuItem = new javax.swing.JMenuItem();
         motoresJMenu = new javax.swing.JMenu();
         listaMotoresJMenu = new javax.swing.JMenu();
         motorTestJMenuItem = new javax.swing.JMenuItem();
@@ -464,6 +465,14 @@ public class PrincipalJForm extends javax.swing.JFrame {
         });
         archivoJMenu.add(nuevaPartidaJMenuItem);
 
+        salirJMenuItem.setText("Salir");
+        salirJMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirJMenuItemActionPerformed(evt);
+            }
+        });
+        archivoJMenu.add(salirJMenuItem);
+
         menuJmenuBar.add(archivoJMenu);
 
         motoresJMenu.setText("Motores");
@@ -561,6 +570,10 @@ public class PrincipalJForm extends javax.swing.JFrame {
         resetGame();
     }//GEN-LAST:event_motorTestJMenuItemActionPerformed
 
+    private void salirJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirJMenuItemActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_salirJMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -648,5 +661,6 @@ public class PrincipalJForm extends javax.swing.JFrame {
     private javax.swing.JMenu motoresJMenu;
     private javax.swing.JMenuItem nuevaPartidaJMenuItem;
     private javax.swing.JTextField palabraJTextField;
+    private javax.swing.JMenuItem salirJMenuItem;
     // End of variables declaration//GEN-END:variables
 }
