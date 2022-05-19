@@ -41,12 +41,15 @@ public class WordleClass {
         for (int i = 0; i < pRand.size(); i++) {
             if (pUser.get(i).equals(pRand.get(i))) {
                 resultado.add(Colores.VERDE);
+                existe.remove(pUser.get(i));
                 bien.add(pUser.get(i));
                 pRand.set(i, null);
                 pUser.set(i, null);
             } else if (!pRand.contains(pUser.get(i))) {
                 resultado.add(Colores.ROJO);
-                mal.add(pUser.get(i));
+                if (!bien.contains(pUser.get(i)) && !existe.contains(pUser.get(i))) {
+                    mal.add(pUser.get(i));
+                }
                 pUser.set(i, null);
             }
         }
@@ -55,12 +58,17 @@ public class WordleClass {
             if (pUser.get(i) != null) {
                 if (pRand.contains(pUser.get(i))) {
                     resultado.add(i, Colores.AMARILLO);
-                    existe.add(pUser.get(i));
+                    if (!bien.contains(pUser.get(i))) {
+                        mal.remove(pUser.get(i));
+                        existe.add(pUser.get(i));
+                    }
                     pRand.set(pRand.indexOf(pUser.get(i)), null);
                     pUser.set(i, null);
                 } else {
                     resultado.add(Colores.ROJO);
-                    mal.add(pUser.get(i));
+                    if (!bien.contains(pUser.get(i)) && !existe.contains(pUser.get(i))) {
+                        mal.add(pUser.get(i));
+                    }
                     pUser.set(i, null);
                 }
             }
@@ -70,7 +78,7 @@ public class WordleClass {
     }
 
     public String getBien() {
-        if (bien.size() == 0) {
+        if (bien.isEmpty()) {
             return "";
         }
         StringBuilder strb = new StringBuilder("");
@@ -84,7 +92,7 @@ public class WordleClass {
     }
 
     public String getMal() {
-        if (mal.size() == 0) {
+        if (mal.isEmpty()) {
             return "";
         }
         StringBuilder strb = new StringBuilder("");
@@ -98,7 +106,7 @@ public class WordleClass {
     }
 
     public String getExiste() {
-        if (existe.size() == 0) {
+        if (existe.isEmpty()) {
             return "";
         }
         StringBuilder strb = new StringBuilder("");
