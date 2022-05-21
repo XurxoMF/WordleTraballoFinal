@@ -43,7 +43,7 @@ public class MotorDocumento implements IMotorPalabras {
         } else {
             /**
              * Leo ao iniciar MotorDocumento para gardar todas as palabras nunha
-             * lista, logo me encargo nos métodos de añadir e aliminar palabras
+             * lista, logo me encargo nos métodos de añadir e eliminar palabras e
              * de que esta lista se manteña sempre cas mesmas palabra que o
              * ficheiro e así evitar leer o ficheiro cada vez que quero buscar
              * algunha palabra.

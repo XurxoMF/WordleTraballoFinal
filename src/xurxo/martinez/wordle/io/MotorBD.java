@@ -5,37 +5,90 @@
  */
 package xurxo.martinez.wordle.io;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author alumno
  */
 public class MotorBD implements IMotorPalabras {
-    
-    
+
+    private static String URL = "jdbc:sqlite:data/dbwordle.db";
+    private String lang;
+
+    public MotorBD(String lang) {
+        this.lang = lang;
+    }
 
     @Override
     public String getPalabraRandom() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> palabras = new ArrayList<>();
+        
+        try ( Connection conn = DriverManager.getConnection(URL);  PreparedStatement ps = conn.prepareStatement("SELECT palabra FROM palabras WHERE lang = ?");) {
+            ps.setString(1, this.lang);
+            try (ResultSet rs = ps.executeQuery();) {
+                while (rs.next()) {
+                    palabras.add(rs.getString("palabra"));
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return palabras.get((int) Math.floor(Math.random() * palabras.size()));
     }
 
     @Override
     public boolean existePalabra(String palabra) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> palabras = new ArrayList<>();
+        
+        try ( Connection conn = DriverManager.getConnection(URL);  PreparedStatement ps = conn.prepareStatement("SELECT palabra FROM palabras WHERE lang = ?");) {
+            ps.setString(1, this.lang);
+            try (ResultSet rs = ps.executeQuery();) {
+                while (rs.next()) {
+                    palabras.add(rs.getString("palabra"));
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return palabras.contains(palabra);
     }
 
     @Override
     public boolean anhadirPalabra(String palabra) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try ( Connection conn = DriverManager.getConnection(URL);  PreparedStatement ps = conn.prepareStatement("INSERT INTO palabras (palabra, lang) VALUES (?, ?)");) {
+            ps.setString(1, palabra);
+            ps.setString(2, this.lang);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
 
     @Override
     public boolean eliminarPalabra(String palabra) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try ( Connection conn = DriverManager.getConnection(URL);  PreparedStatement ps = conn.prepareStatement("DELETE FROM palabras WHERE palabra = ? AND lang = ?");) {
+            ps.setString(1, palabra);
+            ps.setString(2, this.lang);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
 
     @Override
     public boolean checkPalabra(String palabra) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return palabra.matches("[A-Z]{5}");
     }
-    
+
 }

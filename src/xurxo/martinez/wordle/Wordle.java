@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import xurxo.martinez.wordle.game.Colores;
 import xurxo.martinez.wordle.game.WordleClass;
 import xurxo.martinez.wordle.io.IMotorPalabras;
+import xurxo.martinez.wordle.io.MotorBD;
 import xurxo.martinez.wordle.io.MotorTest;
 import xurxo.martinez.wordle.io.MotorDocumento;
 
@@ -51,12 +52,8 @@ public class Wordle {
         System.out.println(game.getExiste());
         */
         
-        try {
-            IMotorPalabras motor = new MotorDocumento();
-            System.out.println(motor.getPalabraRandom());
-        } catch (IOException ex) {
-            Logger.getLogger(Wordle.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        IMotorPalabras motor = new MotorBD("es");
+        System.out.println(motor.getPalabraRandom());
 
     }
     

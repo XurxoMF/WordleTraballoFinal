@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import xurxo.martinez.wordle.game.Colores;
 import xurxo.martinez.wordle.game.WordleClass;
 import xurxo.martinez.wordle.io.IMotorPalabras;
+import xurxo.martinez.wordle.io.MotorBD;
 import xurxo.martinez.wordle.io.MotorDocumento;
 import xurxo.martinez.wordle.io.MotorTest;
 
@@ -73,7 +74,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
         }
     }
 
-    private final void resetGame() {
+    private void resetGame() {
         game = new WordleClass();
         for (JLabel[] labelAr : labels) {
             for (JLabel jLabel : labelAr) {
@@ -92,7 +93,7 @@ public class PrincipalJForm extends javax.swing.JFrame {
         enviarJButton.setEnabled(true);
     }
     
-    private final void finGame() {
+    private void finGame() {
         JOptionPane.showMessageDialog(this, "Límite de intentos alcanzado, GAME OVER");
         resetGame();
     }
@@ -204,6 +205,8 @@ public class PrincipalJForm extends javax.swing.JFrame {
         listaMotoresJMenu = new javax.swing.JMenu();
         motorTestJMenuItem = new javax.swing.JMenuItem();
         motorFicheiroJMenuItem = new javax.swing.JMenuItem();
+        motorBDGalegoJMenuItem = new javax.swing.JMenuItem();
+        motorBDEspanholJMenuItem = new javax.swing.JMenuItem();
         gestionMotorJMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -496,6 +499,22 @@ public class PrincipalJForm extends javax.swing.JFrame {
         });
         listaMotoresJMenu.add(motorFicheiroJMenuItem);
 
+        motorBDGalegoJMenuItem.setText("Motor BD galego");
+        motorBDGalegoJMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motorBDGalegoJMenuItemActionPerformed(evt);
+            }
+        });
+        listaMotoresJMenu.add(motorBDGalegoJMenuItem);
+
+        motorBDEspanholJMenuItem.setText("Motor BD español");
+        motorBDEspanholJMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motorBDEspanholJMenuItemActionPerformed(evt);
+            }
+        });
+        listaMotoresJMenu.add(motorBDEspanholJMenuItem);
+
         motoresJMenu.add(listaMotoresJMenu);
 
         gestionMotorJMenuItem.setText("Gestion motor");
@@ -573,6 +592,16 @@ public class PrincipalJForm extends javax.swing.JFrame {
     private void salirJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirJMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_salirJMenuItemActionPerformed
+
+    private void motorBDGalegoJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorBDGalegoJMenuItemActionPerformed
+        setMotor(new MotorBD("gl"));
+        resetGame();
+    }//GEN-LAST:event_motorBDGalegoJMenuItemActionPerformed
+
+    private void motorBDEspanholJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorBDEspanholJMenuItemActionPerformed
+        setMotor(new MotorBD("es"));
+        resetGame();
+    }//GEN-LAST:event_motorBDEspanholJMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -656,6 +685,8 @@ public class PrincipalJForm extends javax.swing.JFrame {
     private javax.swing.JLabel malJLabel;
     private javax.swing.JPanel malJPanel;
     private javax.swing.JMenuBar menuJmenuBar;
+    private javax.swing.JMenuItem motorBDEspanholJMenuItem;
+    private javax.swing.JMenuItem motorBDGalegoJMenuItem;
     private javax.swing.JMenuItem motorFicheiroJMenuItem;
     private javax.swing.JMenuItem motorTestJMenuItem;
     private javax.swing.JMenu motoresJMenu;
