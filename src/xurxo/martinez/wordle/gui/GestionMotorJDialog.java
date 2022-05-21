@@ -6,6 +6,7 @@
 package xurxo.martinez.wordle.gui;
 
 import xurxo.martinez.wordle.io.IMotorPalabras;
+import xurxo.martinez.wordle.io.MotorTest;
 
 /**
  *
@@ -15,21 +16,17 @@ public class GestionMotorJDialog extends javax.swing.JDialog {
 
     private IMotorPalabras motor;
 
-    public GestionMotorJDialog(java.awt.Frame parent, boolean modal, IMotorPalabras motor) {
-        super(parent, modal);
-        initComponents();
-        this.motor = motor;
-    }
-
     /**
      * Creates new form GestionMotorJDialog
      *
      * @param parent
      * @param modal
+     * @param motor
      */
-    public GestionMotorJDialog(java.awt.Frame parent, boolean modal) {
+    public GestionMotorJDialog(java.awt.Frame parent, boolean modal, IMotorPalabras motor) {
         super(parent, modal);
         initComponents();
+        this.motor = motor;
     }
 
     /**
@@ -218,7 +215,8 @@ public class GestionMotorJDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                GestionMotorJDialog dialog = new GestionMotorJDialog(new javax.swing.JFrame(), true);
+                IMotorPalabras motor = new MotorTest();
+                GestionMotorJDialog dialog = new GestionMotorJDialog(new javax.swing.JFrame(), true, motor);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

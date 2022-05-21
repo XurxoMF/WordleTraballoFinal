@@ -4,16 +4,7 @@
  */
 package xurxo.martinez.wordle;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import xurxo.martinez.wordle.game.Colores;
-import xurxo.martinez.wordle.game.WordleClass;
-import xurxo.martinez.wordle.io.IMotorPalabras;
-import xurxo.martinez.wordle.io.MotorBD;
-import xurxo.martinez.wordle.io.MotorTest;
-import xurxo.martinez.wordle.io.MotorDocumento;
+import xurxo.martinez.wordle.gui.PrincipalJForm;
 
 /**
  *
@@ -25,36 +16,22 @@ public class Wordle {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        /*
-        WordleClass game = new WordleClass();
-        
-        List<Colores> test = game.comprobarPalabra("CASAS", "PACOL");
-        for (Colores col : test) {
-            switch(col) {
-                case VERDE:
-                    System.out.println("VERDE");
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                case AMARILLO:
-                    System.out.println("AMARILLO");
-                    break;
-                case ROJO:
-                    System.out.println("ROJO");
-                    break;
-                default:
-                    System.out.println("ERROR");
-                    break;
+                }
             }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PrincipalJForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
-        System.out.println(game.getBien());
-        System.out.println(game.getMal());
-        System.out.println(game.getExiste());
-        */
-        
-        IMotorPalabras motor = new MotorBD("es");
-        System.out.println(motor.getPalabraRandom());
 
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PrincipalJForm().setVisible(true);
+            }
+        });
     }
     
 } 
